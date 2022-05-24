@@ -1,0 +1,32 @@
+org: miguelcabgil
+app: testing-app
+service: testing-http
+
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+  stage: dev
+  region: us-east-2
+
+plugins:
+  - serverless-plugin-typescript
+  - serverless-offline
+  - serverless-dotenv-plugin
+
+functions:
+  app:
+    handler: src/index.handler
+    events:
+      - http:
+          path: testing
+          method: get
+      - http:
+          path: testing
+          method: post
+
+package:
+  patterns:
+    - '!.build/**'
+
